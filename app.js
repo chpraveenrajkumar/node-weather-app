@@ -2,12 +2,14 @@ require("dotenv").config();
 const express = require("express");
 const tasksRouter = require("./routes/tasks");
 const connectDB = require("./db/connect");
+const notFound = require("./middleware/not-found");
 
 const app = express();
 
 app.use(express.json());
 
 app.use("/api/v1/tasks", tasksRouter);
+app.use(notFound); // handling wild card routes
 
 const port = process.env.PORT || 5000;
 
